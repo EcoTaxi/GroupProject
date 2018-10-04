@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF 8">
+  <title>Eco Taxi Admin Pan</title>
+  <link href="styles.css" rel = "stylesheet">
+</head>  
+
+<body>
+  <div class="Header">
+     <h1>Eco Taxi</h1>   
+  </div>  
+
+  <div class = "Login">
+    <input id = "txtEmail" type = "email" placeholder = "Email"> 
+
+    <input id = "txtPassword" type = "password" placeholder = "Password">
+
+    
+    <button id = "btnLogin" class = "btn btn-action"> 
+     Log in
+    </button>
+
+
+    <button id = "btnNewAdmin" class = "btn btn-secondary">
+      new Admin
+    </button>
+
+    <button id = "btnLogout" class = "btn btn-action hide">
+       logout
+      </button>
+
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBgPm_5eQmX65-ssoiAkRfRA5mnD6p3QyY",
+      authDomain: "ecotaxi-6fe0d.firebaseapp.com",
+      databaseURL: "https://ecotaxi-6fe0d.firebaseio.com",
+      projectId: "ecotaxi-6fe0d",
+      storageBucket: "ecotaxi-6fe0d.appspot.com",
+      messagingSenderId: "816306720049"
+    };
+    firebase.initializeApp(config);
+  </script>
+     <script src = "log.js"></script>
+     
+
+<footer>&copy; Bararosa</footer>
+</body>
+
+</html>
