@@ -1,0 +1,21 @@
+html
+  head
+    title Admin Login
+  body
+    h3 Eco Taxi
+    form(method="post", action="/account/login")
+      table
+        tr
+          td Username
+          td
+            input(type="text", name="username")
+        tr
+          td Password
+          td
+            input(type="password", name="password")
+        tr
+          td &nbsp;
+          td 
+            input(type="submit", value="Login")
+            br
+            a(href="/account/signup") Register
