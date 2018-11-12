@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registration_CardDetails">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+
+            android:id="@+id/editTextCardHolder"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Card Holder Name" />
+
+        <EditText
+
+            android:id="@+id/editTextCardNumber"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Card Number" />
+
+        <EditText
+
+            android:id="@+id/editTextExpiry"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="MM/YR" />
+
+        <EditText
+
+            android:id="@+id/editTextCSV"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="CSV" />
+
+
+        <Button
+            android:id="@+id/CardRegister"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Register" />
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
