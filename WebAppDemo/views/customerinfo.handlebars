@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Customer Info</title>
+   
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    
+    
+    
+    <link href="/files/customer_info/styles.css" type="text/css" rel="stylesheet"/>
+    
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">        
+
+           
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="CustName" class="ax_default shape">
+        <div id="CustName_div" class=""></div>
+        <div id="CustName_text" class="text ">
+          <p><span>Customer Name</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="CustEmail" class="ax_default shape">
+        <div id="CustEmail_div" class=""></div>
+        <div id="CustEmail_text" class="text ">
+          <p><span>Email</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="CustPhone" class="ax_default shape">
+        <div id="CustPhone_div" class=""></div>
+        <div id="CustPhone_text" class="text ">
+          <p><span>Phone Number</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="CustDOB" class="ax_default shape">
+        <div id="CustDOB_div" class=""></div>
+        <div id="CustDOB_text" class="text ">
+          <p><span>DOB</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="CustAddress" class="ax_default shape">
+        <div id="CustAddress_div" class=""></div>
+        <div id="CustAddress_text" class="text ">
+          <p><span>Address</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="PaymetType" class="ax_default shape">
+        <div id="PaymetType_div" class=""></div>
+        <div id="PaymetType_text" class="text ">
+          <p><span>Payment type</span></p>
+        </div>
+      </div>
+{{#each customers}}
+      <!-- Unnamed (Rectangle) -->
+      <div id="Name" class="ax_default shape">
+        <div id="Name_div" class=""></div>
+        <div id="Name_text" class="text ">
+          <p><span>{{name}}</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="Email" class="ax_default shape">
+        <div id="Email_div" class=""></div>
+        <div id="Email_text" class="text ">
+          <p><span>{{email}}</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="Phone" class="ax_default shape">
+        <div id="Phone_div" class=""></div>
+        <div id="Phone_text" class="text ">
+          <p><span>{{phone}}</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="DOB" class="ax_default shape">
+        <div id="DOB_div" class=""></div>
+        <div id="DOB_text" class="text ">
+          <p><span>{{dob}}</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="Address" class="ax_default shape">
+        <div id="Address_div" class=""></div>
+        <div id="Address_text" class="text ">
+          <p><span>{{address}}</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="CardNo" class="ax_default shape">
+        <div id="CardNo_div" class=""></div>
+        <div id="CardNo_text" class="text ">
+          <p><span>{{pType}}</span></p>
+        </div>
+      </div>      
+{{/each}}
+      
+
+      
+      </div>
+    </div>
+  </body>
+</html>
