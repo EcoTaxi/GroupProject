@@ -1,0 +1,42 @@
+{{#each errors}}
+<div class= "alert alert-danger">{{text}}</div>
+{{else}}
+{{/each}}
+<div class="card card-body">
+  <h3>Edit Customer</h3>
+  <form action="/customers/{{Customer.id}}?_method=PUT"
+   method="post">
+   <input type="hidden" name="_method" value="PUT">
+  <div class="form-group">
+    <label for="name">name</label>
+    <input type="text" class="form-control" name="name" 
+    value="{{Customer.name}}"required>
+  </div>
+  <div class="form-group">
+    <label for="email">email</label>
+    <input type="text" class="form-control" name="email" 
+    value="{{Customer.email}}"required>
+  </div>
+  <div class="form-group">
+    <label for="phone">phone</label>
+    <input type="text" class="form-control" name="phone" 
+    value="{{Customer.phone}}"required>
+  </div>
+  <div class="form-group">
+    <label for="dob">dob</label>
+    <input type="text" class="form-control" name="dob" 
+    value="{{Customer.dob}}"required>
+  </div>
+  <div class="form-group">
+    <label for="address">address</label>
+    <textarea class="form-control" 
+    name="address"required>{{Customer.address}}</textarea>
+  </div>
+  <div class="form-group">
+    <label for="pType">pType</label>
+    <input type="text" class="form-control" name="pType" 
+    value="{{Customer.pType}}"required>
+  </div>
+  <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

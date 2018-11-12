@@ -1,0 +1,544 @@
+﻿body {
+  margin:0px;
+  background-color:rgba(49, 172, 19, 0.712);
+  background-image:none;
+  position:relative;
+  left:-0px;
+  width:1268px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+}
+#base {
+  position:auto;
+  z-index:0;
+  text-align: center;
+}
+
+#CustName_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgb(7, 141, 2) 5%, rgba(7, 141, 2) 15%, rgba(7, 141, 3) 100%, rgba(7, 141, 4) 100%);
+  background:-moz-linear-gradient(180deg, rgba(5, 107, 1) 0%, rgba(7, 141, 2) 0%, rgba(7, 141,3) 100%, rgba(7, 141, 42) 100%);
+  background:linear-gradient(180deg, rgba(5, 107, 1) 0%, rgba(7, 141, 2) 0%, rgba(7, 141, 3) 100%, rgba(7, 141, 4) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  font-size:28px;
+  line-height:24px;
+}
+#CustName {
+  border-width:0px;
+  position:absolute;
+  left:99px;
+  top:226px;
+  width:413px;
+  height:116px;
+  font-size:28px;
+  line-height:24px;
+  color: whitesmoke;
+}
+
+#CustName_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:46px;
+  width:409px;
+  word-wrap:break-word;
+  
+}
+#CustEmail_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:28px;
+  line-height:24px;
+}
+#CustEmail {
+  border-width:0px;
+  position:absolute;
+  left:99px;
+  top:384px;
+  width:413px;
+  height:116px;
+  font-size:28px;
+  line-height:24px;
+}
+
+
+#CustEmail_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:46px;
+  width:409px;
+  word-wrap:break-word;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+}
+#CustPhone_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:28px;
+  line-height:24px;
+}
+#CustPhone {
+  border-width:0px;
+  position:absolute;
+  left:99px;
+  top:554px;
+  width:413px;
+  height:116px;
+  font-size:28px;
+  line-height:24px;
+}
+
+
+#CustPhone_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:46px;
+  width:409px;
+  word-wrap:break-word;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+}
+#CustDOB_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:28px;
+  line-height:24px;
+}
+#CustDOB {
+  border-width:0px;
+  position:absolute;
+  left:99px;
+  top:724px;
+  width:413px;
+  height:116px;
+  font-size:28px;
+  line-height:24px;
+}
+
+#CustDOB_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:46px;
+  width:409px;
+  word-wrap:break-word;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+}
+#CustAddress_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:28px;
+  line-height:24px;
+}
+#CustAddress {
+  border-width:0px;
+  position:absolute;
+  left:99px;
+  top:888px;
+  width:413px;
+  height:116px;
+  font-size:28px;
+  line-height:24px;
+}
+
+#CustAddress_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:46px;
+  width:409px;
+  word-wrap:break-word;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+}
+#PaymetType_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:28px;
+  line-height:24px;
+}
+#PaymetType {
+  border-width:0px;
+  position:absolute;
+  left:99px;
+  top:1044px;
+  width:413px;
+  height:116px;
+  font-size:28px;
+  line-height:24px;
+}
+
+#PaymetType_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:46px;
+  width:409px;
+  word-wrap:break-word;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+}
+#Name_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:24px;
+  line-height:28px;
+}
+#Name {
+  border-width:0px;
+  position:absolute;
+  left:673px;
+  top:226px;
+  width:413px;
+  height:116px;
+  font-size:24px;
+  line-height:28px;
+}
+
+#Name_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:44px;
+  width:409px;
+  word-wrap:break-word;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+}
+#Email_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:24px;
+  line-height:28px;
+}
+#Email {
+  border-width:0px;
+  position:absolute;
+  left:673px;
+  top:384px;
+  width:413px;
+  height:116px;
+  font-size:24px;
+  line-height:28px;
+}
+
+#Email_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:44px;
+  width:409px;
+  word-wrap:break-word;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+}
+#Phone_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:24px;
+  line-height:28px;
+}
+#Phone {
+  border-width:0px;
+  position:absolute;
+  left:673px;
+  top:554px;
+  width:413px;
+  height:116px;
+  font-size:24px;
+  line-height:28px;
+}
+
+#Phone_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:44px;
+  width:409px;
+  word-wrap:break-word;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+}
+#DOB_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:24px;
+  line-height:28px;
+}
+#DOB {
+  border-width:0px;
+  position:absolute;
+  left:673px;
+  top:724px;
+  width:413px;
+  height:116px;
+  font-size:24px;
+  line-height:28px;
+}
+
+#DOB_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:44px;
+  width:409px;
+  word-wrap:break-word;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+}
+#Address_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:24px;
+  line-height:28px;
+}
+#Address {
+  border-width:0px;
+  position:absolute;
+  left:673px;
+  top:888px;
+  width:413px;
+  height:116px;
+  font-size:24px;
+  line-height:28px;
+}
+
+#Address_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:26px;
+  width:409px;
+  word-wrap:break-word;
+  padding-inline-end: 10%;
+  padding-inline-start: 10%;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+}
+#CardNo_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:413px;
+  height:116px;
+  background:-webkit-linear-gradient(270deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:-moz-linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  background:linear-gradient(180deg, rgba(253, 253, 253, 1) 0%, rgba(253, 253, 253, 1) 0%, rgba(224, 224, 224, 1) 100%, rgba(224, 224, 224, 1) 100%);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(204, 204, 204, 1);
+  border-radius:6px;
+  -moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.0666666666666667), 0px 1px 0px 0px rgba(255, 255, 255, 0.117647058823529) inset;
+  font-size:24px;
+  line-height:28px;
+}
+#CardNo {
+  border-width:0px;
+  position:absolute;
+  left:673px;
+  top:1044px;
+  width:413px;
+  height:116px;
+  font-size:24px;
+  line-height:28px;
+  
+}
+
+#CardNo_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:26px;
+  width:409px;
+  word-wrap:break-word;
+  padding-inline-end: 10%;
+  padding-inline-start: 10%;
+  text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -webkit-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  -moz-text-shadow:0px 1px 0px rgba(255, 255, 255, 1);
+  
+}
+
+
+
+
+
+
+
