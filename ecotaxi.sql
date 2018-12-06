@@ -33,9 +33,7 @@ CREATE TABLE `customer` (
   `phoneNo` int(15) NOT NULL,
   `dob` date NOT NULL,
   `address` varchar(100) DEFAULT NULL,
-  `paymentType` varchar(20) DEFAULT NULL,
-  `cardNo` int(30) DEFAULT NULL,
-  `credit` decimal(8,0) DEFAULT NULL
+  `paymentType` varchar(20) DEFAULT NULL,  
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
