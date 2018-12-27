@@ -74,10 +74,9 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     ArrayList<LatLng> MarkerPoints;
     private GoogleApiClient mGoogleApiClient;
     private String MY_API_KEY = "AIzaSyDCV_51ykRTUKcC1wvvKWJu8PQPPJY3M9w";
-    private String carType = "5 Seater";
     private String userId;
     private DatabaseReference mDatabase;
-
+    private String review = "";
 
 
     @Override
@@ -295,17 +294,20 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        //find out which menu item was pressed
-        switch (item.getItemId()) {
-            case R.id.option1:
-                carType = "5 seater";
+        switch (item.getItemId()){
+            case R.id.bad:
+                review = "bad";
                 return true;
-            case R.id.option2:
-                carType = "8 seater";
+            case R.id.good:
+                review = "good";
+                return true;
+            case R.id.mrBurns:
+                review = "excellent";
                 return true;
             default:
                 return false;
-        }    }
+        }
+    }
 
     // Fetches data from url passed
     private class FetchUrl extends AsyncTask<String, Void, String> {
@@ -480,10 +482,8 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button:
-                PopupMenu popup = new PopupMenu(booking_Interface.this, v);
-                popup.setOnMenuItemClickListener(booking_Interface.this);
-                popup.inflate(R.menu.menu);
-                popup.show();
+                Log.d("onPostExecute","onPostExecute lineoptions decoded");
+
                 toastMessage("car type");
                 break;
 
@@ -492,23 +492,29 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 String s  = "Trip" ;
                 mDatabase = FirebaseDatabase.getInstance().getReference(s);
 
-                if (destUp == null){
+                if (destUp.equals(null)){
                     toastMessage("Please Pick a place to go..");
 
                 }else{
-                    Trip trip = new Trip(email,pickUp,destUp, carType);
+                    Trip trip = new Trip(email,pickUp,destUp);
                     trip.setDest(destUp);
                     trip.setPickup(pickUp);
                     trip.setEmail(email);
-                    trip.setCarType(carType);
-
                     userId = mDatabase.push().getKey();
                     mDatabase.child("Trip").setValue(trip);
-                    toastMessage("Request Send.");
                 }
                 break;
 
             case R.id.button3:
+
+                PopupMenu pop = new PopupMenu(booking_Interface.this, v);
+                pop.setOnMenuItemClickListener(booking_Interface.this);
+                pop.inflate(R.menu.ratings);
+                pop.show();
+
+
+
+
                 break;
 
             default:
