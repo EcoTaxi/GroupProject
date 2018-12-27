@@ -4,12 +4,10 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Looper;
-
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -17,20 +15,17 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-
 import android.location.Location;
+import android.view.View;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
-
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment;
@@ -39,12 +34,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONObject;
 
@@ -71,15 +67,22 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     private GoogleMap mMap;
     private LatLng pickUp;
     private LatLng destUp;
+    private String email = null;
 
     ArrayList<LatLng> MarkerPoints;
     private GoogleApiClient mGoogleApiClient;
     private String MY_API_KEY = "AIzaSyDCV_51ykRTUKcC1wvvKWJu8PQPPJY3M9w";
+    private String userId;
+    private DatabaseReference mDatabase;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        email = getIntent().getExtras().getString("email");
+
 
         setContentView(R.layout.activity_booking__interface);
 
@@ -106,8 +109,10 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
                 destUp = markerOptionsDest.getPosition();
                 pickUp = markerOptionsPickUp.getPosition();
+                MarkerPoints.clear();
                 MarkerPoints.add(pickUp);
                 MarkerPoints.add(destUp);
+                getDistance(pickUp,destUp);
 
                 // Checks, whether start and end locations are captured
                 if (MarkerPoints.size() >= 2) {
@@ -140,6 +145,22 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         mapFragment.getMapAsync(this);
     }
 
+    private float getDistance(LatLng pickUp, LatLng destUp) {
+        Location crntLocation=new Location("crntlocation");
+        crntLocation.setLatitude(pickUp.latitude);
+        crntLocation.setLongitude(pickUp.longitude);
+
+        Location newLocation=new Location("newlocation");
+        newLocation.setLatitude(destUp.latitude);
+        newLocation.setLongitude(destUp.longitude);
+
+        float distance =crntLocation.distanceTo(newLocation) / 1000; // in km
+        toastMessage(String.valueOf(distance));
+        return distance;
+    }
+    private void toastMessage(String message){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void onPause() {
@@ -358,7 +379,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
                 lineOptions.width(10);
-                lineOptions.color(Color.RED);
+                lineOptions.color(Color.BLUE);
 
                 Log.d("onPostExecute","onPostExecute lineoptions decoded");
 
@@ -439,6 +460,39 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
             }
         }
     }
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.button:
+                Log.d("onPostExecute","onPostExecute lineoptions decoded");
+
+                toastMessage("car type");
+                break;
+
+            case R.id.button2:
+                //Validate ID onCreate
+                String s  = "Trip" ;
+                mDatabase = FirebaseDatabase.getInstance().getReference(s);
+
+                if (destUp.equals(null)){
+                    toastMessage("Please Pick a place to go..");
+
+                }else{
+                    Trip trip = new Trip(email,pickUp,destUp);
+                    trip.setDest(destUp);
+                    trip.setPickup(pickUp);
+                    trip.setEmail(email);
+                    userId = mDatabase.push().getKey();
+                    mDatabase.child("Trip").setValue(trip);
+                }
+                break;
+
+            case R.id.button3:
+                break;
+
+            default:
+                break;
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -469,6 +523,4 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
             }
         }
     }
-
-
 }
