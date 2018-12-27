@@ -16,7 +16,9 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.location.Location;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -56,7 +58,7 @@ import java.util.List;
 
 
 @SuppressWarnings("ALL")
-public class booking_Interface extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class booking_Interface extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, PopupMenu.OnMenuItemClickListener {
     SupportMapFragment mapFragment;
     LocationRequest mLocationRequest;
     Location mLastLocation;
@@ -72,6 +74,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     ArrayList<LatLng> MarkerPoints;
     private GoogleApiClient mGoogleApiClient;
     private String MY_API_KEY = "AIzaSyDCV_51ykRTUKcC1wvvKWJu8PQPPJY3M9w";
+    private String carType = "5 Seater";
     private String userId;
     private DatabaseReference mDatabase;
 
@@ -290,6 +293,20 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
     }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        //find out which menu item was pressed
+        switch (item.getItemId()) {
+            case R.id.option1:
+                carType = "5 seater";
+                return true;
+            case R.id.option2:
+                carType = "8 seater";
+                return true;
+            default:
+                return false;
+        }    }
+
     // Fetches data from url passed
     private class FetchUrl extends AsyncTask<String, Void, String> {
 
@@ -463,8 +480,10 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button:
-                Log.d("onPostExecute","onPostExecute lineoptions decoded");
-
+                PopupMenu popup = new PopupMenu(booking_Interface.this, v);
+                popup.setOnMenuItemClickListener(booking_Interface.this);
+                popup.inflate(R.menu.menu);
+                popup.show();
                 toastMessage("car type");
                 break;
 
@@ -473,16 +492,19 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 String s  = "Trip" ;
                 mDatabase = FirebaseDatabase.getInstance().getReference(s);
 
-                if (destUp.equals(null)){
+                if (destUp == null){
                     toastMessage("Please Pick a place to go..");
 
                 }else{
-                    Trip trip = new Trip(email,pickUp,destUp);
+                    Trip trip = new Trip(email,pickUp,destUp, carType);
                     trip.setDest(destUp);
                     trip.setPickup(pickUp);
                     trip.setEmail(email);
+                    trip.setCarType(carType);
+
                     userId = mDatabase.push().getKey();
                     mDatabase.child("Trip").setValue(trip);
+                    toastMessage("Request Send.");
                 }
                 break;
 
