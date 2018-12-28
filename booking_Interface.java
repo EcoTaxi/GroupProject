@@ -19,6 +19,7 @@ import android.location.Location;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -70,13 +71,15 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     private LatLng pickUp;
     private LatLng destUp;
     private String email = null;
+    TextView price;
 
     ArrayList<LatLng> MarkerPoints;
     private GoogleApiClient mGoogleApiClient;
     private String MY_API_KEY = "AIzaSyDCV_51ykRTUKcC1wvvKWJu8PQPPJY3M9w";
+    private String carType = "5 Seater";
     private String userId;
     private DatabaseReference mDatabase;
-    private String review = "";
+    private String review = " ";
 
 
     @Override
@@ -84,8 +87,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
 
         email = getIntent().getExtras().getString("email");
-
-
+        price = (TextView)findViewById(R.id.priceView);
         setContentView(R.layout.activity_booking__interface);
 
         // Initializing
@@ -158,6 +160,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
         float distance =crntLocation.distanceTo(newLocation) / 1000; // in km
         toastMessage(String.valueOf(distance));
+        //price.setText("Estimated Price: €" + String.valueOf(distance));
         return distance;
     }
     private void toastMessage(String message){
@@ -294,7 +297,14 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()){
+        //find out which menu item was pressed
+        switch (item.getItemId()) {
+            case R.id.option1:
+                carType = "5 seater";
+                return true;
+            case R.id.option2:
+                carType = "8 seater";
+                return true;
             case R.id.bad:
                 review = "bad";
                 return true;
@@ -306,8 +316,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 return true;
             default:
                 return false;
-        }
-    }
+        }    }
 
     // Fetches data from url passed
     private class FetchUrl extends AsyncTask<String, Void, String> {
@@ -482,8 +491,10 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button:
-                Log.d("onPostExecute","onPostExecute lineoptions decoded");
-
+                PopupMenu popup = new PopupMenu(booking_Interface.this, v);
+                popup.setOnMenuItemClickListener(booking_Interface.this);
+                popup.inflate(R.menu.menu);
+                popup.show();
                 toastMessage("car type");
                 break;
 
@@ -492,31 +503,27 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 String s  = "Trip" ;
                 mDatabase = FirebaseDatabase.getInstance().getReference(s);
 
-                if (destUp.equals(null)){
+                if (destUp == null){
                     toastMessage("Please Pick a place to go..");
 
                 }else{
-                    Trip trip = new Trip(email,pickUp,destUp);
+                    Trip trip = new Trip(email,pickUp,destUp, carType);
                     trip.setDest(destUp);
                     trip.setPickup(pickUp);
                     trip.setEmail(email);
+                    trip.setCarType(carType);
+
                     userId = mDatabase.push().getKey();
                     mDatabase.child("Trip").setValue(trip);
+                    toastMessage("Request Send.");
                 }
                 break;
 
             case R.id.button3:
-
                 PopupMenu pop = new PopupMenu(booking_Interface.this, v);
                 pop.setOnMenuItemClickListener(booking_Interface.this);
                 pop.inflate(R.menu.ratings);
                 pop.show();
-
-
-
-
-                break;
-
             default:
                 break;
         }
