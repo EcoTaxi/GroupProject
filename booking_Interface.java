@@ -71,7 +71,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     private LatLng pickUp;
     private LatLng destUp;
     private String email = null;
-    TextView price;
+    private TextView price;
 
     ArrayList<LatLng> MarkerPoints;
     private GoogleApiClient mGoogleApiClient;
@@ -87,7 +87,6 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
 
         email = getIntent().getExtras().getString("email");
-        price = (TextView)findViewById(R.id.priceView);
         setContentView(R.layout.activity_booking__interface);
 
         // Initializing
@@ -160,7 +159,8 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
         float distance =crntLocation.distanceTo(newLocation) / 1000; // in km
         toastMessage(String.valueOf(distance));
-        //price.setText("Estimated Price: €" + String.valueOf(distance));
+        price = (TextView) findViewById(R.id.priceView);
+        price.setText("Estimated Price: €" + String.valueOf(distance));
         return distance;
     }
     private void toastMessage(String message){

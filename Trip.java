@@ -5,10 +5,21 @@ import com.google.android.gms.maps.model.LatLng;
 public class Trip {
 
     private String email;
+    private String carType;
     private LatLng pickup;
     private LatLng dest;
 
-    public Trip(String email, LatLng pickup, LatLng dest){
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
+
+    public Trip(String email, LatLng pickup, LatLng dest, String carType){
+        this.carType = carType;
+
         this.email = email;
         this.dest = dest;
         this.pickup = pickup;
