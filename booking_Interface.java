@@ -71,7 +71,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     private LatLng pickUp;
     private LatLng destUp;
     private String email = null;
-    private TextView price;
+    TextView price;
 
     ArrayList<LatLng> MarkerPoints;
     private GoogleApiClient mGoogleApiClient;
@@ -87,6 +87,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
 
         email = getIntent().getExtras().getString("email");
+        price = (TextView)findViewById(R.id.priceView);
         setContentView(R.layout.activity_booking__interface);
 
         // Initializing
@@ -159,8 +160,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
         float distance =crntLocation.distanceTo(newLocation) / 1000; // in km
         toastMessage(String.valueOf(distance));
-        price = (TextView) findViewById(R.id.priceView);
-        price.setText("Estimated Price: €" + String.valueOf(distance));
+        //price.setText("Estimated Price: €" + String.valueOf(distance));
         return distance;
     }
     private void toastMessage(String message){
@@ -307,16 +307,31 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 return true;
             case R.id.bad:
                 review = "bad";
+                sendRating(review);
                 return true;
             case R.id.good:
                 review = "good";
+                sendRating(review);
                 return true;
             case R.id.mrBurns:
                 review = "excellent";
+                sendRating(review);
                 return true;
             default:
                 return false;
         }    }
+
+    private void sendRating(String review) {
+        String s = "Ratings";
+        mDatabase = FirebaseDatabase.getInstance().getReference(s);
+
+        Ratings ratings = new Ratings(email, review);
+        ratings.setEmail(email);
+        ratings.setRating(review);
+        userId = mDatabase.push().getKey();
+        mDatabase.child("Ratings").setValue(ratings);
+        toastMessage("Ratings sent.");
+    }
 
     // Fetches data from url passed
     private class FetchUrl extends AsyncTask<String, Void, String> {
@@ -507,7 +522,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                     toastMessage("Please Pick a place to go..");
 
                 }else{
-                    Trip trip = new Trip(email,pickUp,destUp, carType);
+                    Trip trip = new Trip(email, pickUp, destUp, carType);
                     trip.setDest(destUp);
                     trip.setPickup(pickUp);
                     trip.setEmail(email);
@@ -524,8 +539,9 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 pop.setOnMenuItemClickListener(booking_Interface.this);
                 pop.inflate(R.menu.ratings);
                 pop.show();
-            default:
-                break;
+
+                default:
+                    break;
         }
     }
 
