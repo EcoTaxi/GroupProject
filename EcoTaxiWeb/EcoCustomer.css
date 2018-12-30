@@ -1,0 +1,181 @@
+/* ----------------------- Main Display area -------------------------- */
+
+body {
+	margin: 0px;
+	background:#4dff4d;
+
+		
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+		
+}
+
+/* ----------------------- HEADER -------------------------- */
+
+
+	#header {
+		
+		display: flex;
+		background: green;
+		color: white;
+		display:
+		
+	}
+	
+	.logo{
+		
+		height:100px;
+	}
+
+
+	
+	
+#header h1 { 
+	margin: 0px; 
+	padding: 20px;
+	font-size: 3em;
+	line-height: 1em;	
+
+	font-family: cursive;
+} 
+	
+	
+		
+		
+		
+#header h1 { margin-right: 100px; }
+
+
+/* ----------------------- MENU -------------------------- */
+
+
+			
+#menu {
+				
+#background: green;
+	margin: 0px; 
+}
+				
+				
+				
+				
+
+			
+			
+#menu li {
+	float: left; 
+	border: none;
+	border-top: none;
+	border-bottom: none;
+}
+
+
+#menuicon {
+	font-family: helvetica;
+	color: white;
+	font-size: 1em; 
+	line-height: 2em;
+	border: white 1px solid;
+			
+	width: 100px;
+	text-align: center;
+	background: green;
+	position: absolute; 
+	top: 10px; right:10px;
+	border-radius: 10px;
+			
+}
+		
+		
+	
+#menu ul{
+	
+	margin: auto;
+	list-style: none;
+	padding: 0px;
+	font-family: helvetica, sans-serif;
+	overflow: auto;
+}
+		
+#menu ul li {
+	
+	font-size: 1.3em;
+	text-align: center;
+	color: white;
+	float: left;
+	width: 50%;
+	line-height: 3em;
+	background: green;
+
+}
+		
+		
+#menu ul li a {
+	color: white;
+	border: 1px white solid;
+		
+	text-decoration: none;
+	display: block;
+}	
+
+
+	#menu {
+		width: 20%; 
+		float: left;
+	}
+	
+	#menu ul li {
+		float: none; 
+		width: auto;
+		font-size: 1.5em;
+	}	
+	
+
+		
+	.copyright{
+	position: absolute;
+	color:dimgray;
+	left:45%;
+	bottom:0px;
+	}
+	
+	
+	.edycja{
+	padding-left:5px;
+	display: flex;
+	flex-direction:column;
+    width:450px;	
+	
+	}
+	
+	.a{
+		width:80px;
+		color:white;
+		background:green;
+		border: white;
+		text-align:center;
+	}
+	.btn{
+		
+		
+		color:white;
+		background:green;
+	}
+	.view{
+		display:flex;
+		justify-content: space-between;
+		padding-bottom:15px;
+		padding-top:10px;
+	}
+	.display{
+		background:green;
+		color:white;	
+		width:450px;
+	}
+	#status{
+		
+		background:green;
+		color:white;
+	}
+	

@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+
+  <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Customer Info</title>
+ <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  const config = {
+    apiKey: "AIzaSyAz1nWyvHjJ2qCPzY_izdae6jZ5Dpj6LHU",
+    authDomain: "ecotaxiphoneapp-9e80f.firebaseapp.com",
+    databaseURL: "https://ecotaxiphoneapp-9e80f.firebaseio.com",
+    projectId: "ecotaxiphoneapp-9e80f",
+    storageBucket: "ecotaxiphoneapp-9e80f.appspot.com",
+    messagingSenderId: "53237770388"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(() => {
+  const database = firebase.database();
+$('#nameBox').val('');
+
+ $('#readButton').click(() => {
+    const key = 'User/' + $('#nameBox').val();
+    // 'once' reads the value once from the database
+    database.ref(key).once('value', (snapshot) => {
+      const data = snapshot.val();
+      console.log('You received some data!', data);
+      if (!data) {
+        // clear the display
+        $('#disp').html('');       
+        $('#disp').html('Error: could not find user: ' + key);
+        return;
+      }
+      if (data.name && data.email) {
+        $('#disp').html('name: ' + data.name +';  '+'email: '+data.email);
+		$('#nameBox').val('');
+      } else {
+        // clear the display
+        $('#disp').html('');
+        
+      }
+    });
+  });
+
+  $('#allUsersButton').click(() => {
+    database.ref('User/').on('value', (snapshot) => {
+      const allUsers = snapshot.val();
+     console.log('User/ changed:', allUsers);
+      if (allUsers) {
+        $('#status').html(''); // clear the HTML
+        $('#status').append('List of users:');
+        Object.keys(allUsers).forEach((User) => {
+        $('#status').append('<p>' +  ' ' + allUsers[User].email + ';  ' + allUsers[User].address +';  ' + allUsers[User].name + '</p>');
+        });
+      }
+    });
+  });
+  $('#getRatings').click(() => {
+    database.ref('Ratings/').once('value', (snapshot) => {
+      const allUsers = snapshot.val();
+     console.log('Ratings/ changed:', allUsers);
+      if (allUsers) {
+        $('#disp').html(''); // clear the HTML
+        $('#disp').append('Email and Rating:');
+        Object.keys(allUsers).forEach((Ratings) => {
+        $('#disp').append('<p>' +  ' ' + allUsers[Ratings].email +';  ' + allUsers[Ratings].rating +'</p>');
+        });
+      }
+    });
+  });
+  $('#getReview').click(() => {
+    database.ref('Ratings/').once('value', (snapshot) => {
+      const allUsers = snapshot.val();
+     console.log('Ratings/ changed:', allUsers);
+      if (allUsers) {
+        $('#disp').html(''); // clear the HTML
+        $('#disp').append('Reviews:');
+        Object.keys(allUsers).forEach((Ratings) => {
+        $('#disp').append('<p>' +  ' ' +  allUsers[Ratings].review +'</p>');
+        });
+      }
+    });
+  });
+     $('#usersNameButton').click(() => {
+    database.ref('User/').once('value', (snapshot) => {
+      const allUsers = snapshot.val();
+     console.log('User/ changed:', allUsers);
+      if (allUsers) {
+        $('#disp').html(''); // clear the HTML
+        $('#disp').append('List of users:');
+        Object.keys(allUsers).forEach((User) => {
+        $('#disp').append('<p>' + User + '</p>');
+        });
+      }
+    });
+  });
+  
+  $('#insertPhoneNumBox').val('');
+	  $('#insertNameBox').val('');
+	  $('#insertAddressBox').val('');
+	  $('#insertDOBBox').val('');
+	  $('#insertEmailBox').val('');
+	  $('#insertPasswordBox').val('');
+	  
+    $('#insertButton').click(() => {
+    const name = $('#insertNameBox').val();
+     database.ref('User/' + name).set({
+	
+      name: $('#insertNameBox').val(),
+	 
+      address: $('#insertAddressBox').val(),
+	 
+	  dob:$('#insertDOBBox').val(),
+	 
+	  email:$('#insertEmailBox').val(),
+	 
+	  password:$('#insertPasswordBox').val(),
+	
+	  phoneNum:$('#insertPhoneNumBox').val(),
+	  
+    });
+	  $('#insertPhoneNumBox').val('');
+	  $('#insertNameBox').val('');
+	  $('#insertAddressBox').val('');
+	  $('#insertDOBBox').val('');
+	  $('#insertEmailBox').val('');
+	  $('#insertPasswordBox').val('');
+  });
+   $('#deleteNameBox').val('');
+  $('#deleteButton').click(() => {
+	
+    const name = $('#deleteNameBox').val();
+    database.ref('User/' + name).remove();
+	 $('#deleteNameBox').val('');
+  });
+ 
+});
+  </script>
+  <link rel="stylesheet" type="text/css" href="EcoCustomer.css">
+  </head>
+  <body>
+    <div id = "header"> 
+<img id="logo" class="logo " src="images/home/u0.png"/>
+<h1>Eco Taxi</h1> 
+</div>
+<div id = "menu" class = "closed">
+
+<ul>
+<li><a href = "index.html">Home</a></li>
+<li><a href = "customer_info.html">Customer Info</a></li>
+<li><a href = "booking.html">Booking</a></li>
+<li><a href = "car_details.html">Car Status</a></li>
+</ul>
+</div >
+
+    <a class="a"> Name: </a><input id="nameBox" type="text" size="20" placeholder="User Name"/>
+  <button class="btn" id="readButton">Get profile</button>
+  <button class="btn"  id="allUsersButton">Get all users</button>
+  <button class="btn"  id="getRatings">Ratings</button>
+  <button class="btn"  id="getReview">Review</button>
+  <button class="btn"  id="usersNameButton">Users List</button>
+  
+
+ <div class="view">
+<div class= "edycja">
+ 
+ <a class="a">Name:</a> <input id="insertNameBox" type="text" size="20"/>
+  <a class="a"> Address: </a><input id="insertAddressBox" type="text" size="20"/>
+  <a class="a">DOB     :</a> <input id="insertDOBBox" type="text" size="20"/>
+  
+  <a class="a">Email:</a> <input id="insertEmailBox" type="text" size="20"/> 
+  
+ <a class="a">PhoneNum:</a> <input id="insertPhoneNumBox" type="text" size="20"/>
+ 
+ <a class="a"> Password:</a> <input id="insertPasswordBox" type="text" size="20"/>  
+  
+ <button  class="btn" id="insertButton">Insert into/ Edit database</button>
+ 
+ </div>
+ <div class ="display" id="disp"></div>
+ </div>
+  <hr/>
+  
+  <a class="a">Name:</a> <input id="deleteNameBox" type="text" size="20"placeholder="Eneter name to remove"/>
+  <button class="btn"  id="deleteButton">Delete from database</button>
+  <hr/>
+
+  
+  <div id="status" ></div>  
+ 
+  <div class= "edycja">
+  <footer class='copyright'> &#169 2018 Barbarossa</footer>
+  </body>
+</html>
