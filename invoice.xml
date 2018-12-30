@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:id="@+id/popup_element"
     android:gravity="center"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <TextView
@@ -39,13 +41,26 @@
         android:text="C02 Savings:"
         android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/review"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:hint="Review"
-            />
+    <EditText
+        android:id="@+id/review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:hint="Review"
+        />
+    <Button
+        android:id="@+id/btn_close_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="Close" />
+
+    <Button
+        android:id="@+id/button3"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ratings" />
 
 
-    </LinearLayout>
+</LinearLayout>
