@@ -1,24 +1,35 @@
 package com.example.joeco.ecotaxiphoneapp;
 
 import android.Manifest;
+import android.animation.ValueAnimator;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.location.Location;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
@@ -37,22 +48,21 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,15 +81,35 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     private LatLng pickUp;
     private LatLng destUp;
     private String email = null;
-    TextView price;
-
+    private TextView price;
+    private String dist;
+    private String ecoStat;
+    private String rating = " ";
     ArrayList<LatLng> MarkerPoints;
+    ArrayList<LatLng> points;
     private GoogleApiClient mGoogleApiClient;
     private String MY_API_KEY = "AIzaSyDCV_51ykRTUKcC1wvvKWJu8PQPPJY3M9w";
     private String carType = "5 Seater";
     private String userId;
     private DatabaseReference mDatabase;
     private String review = " ";
+    PolylineOptions lineOptions = null;
+    private Marker carMarker;
+    private Handler handler;
+    private int index;
+    private int next;
+    private LatLng startpos;
+    private LatLng endpos;
+    private float v;
+    private double lng;
+    private double lat;
+    private Button b;
+    private String p;
+    private LatLng startPosition;
+    private LatLng endPosition;
+
+
+
 
 
     @Override
@@ -87,15 +117,26 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
 
         email = getIntent().getExtras().getString("email");
-        price = (TextView)findViewById(R.id.priceView);
         setContentView(R.layout.activity_booking__interface);
 
         // Initializing
         MarkerPoints = new ArrayList<>();
 
+
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
 
+        b = (Button)findViewById(R.id.button4);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!autocompleteFragment.equals("")) {
+                    Animate();
+                }else{
+                    toastMessage("Pick a place to go!");
+                }
+            }
+        });
         autocompleteFragment = (SupportPlaceAutocompleteFragment)
                 getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
@@ -159,8 +200,14 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         newLocation.setLongitude(destUp.longitude);
 
         float distance =crntLocation.distanceTo(newLocation) / 1000; // in km
+        DecimalFormat dc = new DecimalFormat(".##");
+        String d = dc.format(distance);
         toastMessage(String.valueOf(distance));
-        //price.setText("Estimated Price: €" + String.valueOf(distance));
+        price = (TextView) findViewById(R.id.priceView);
+        p = d;
+        price.setText("Estimated Price: €" + d);
+        ecoStat = String.valueOf(Double.valueOf(d)*80)+"g";
+        dist = String.valueOf(d+"km");
         return distance;
     }
     private void toastMessage(String message){
@@ -306,32 +353,35 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 carType = "8 seater";
                 return true;
             case R.id.bad:
-                review = "bad";
-                sendRating(review);
+                rating = "bad";
+
+                sendRating(rating, review);
                 return true;
             case R.id.good:
-                review = "good";
-                sendRating(review);
+                rating = "good";
+                sendRating(rating, review);
                 return true;
             case R.id.mrBurns:
-                review = "excellent";
-                sendRating(review);
+                rating = "excellent";
+                sendRating(rating, review);
                 return true;
             default:
                 return false;
-        }    }
-
-    private void sendRating(String review) {
+        }
+    }
+    private void sendRating(String rating, String review) {
         String s = "Ratings";
         mDatabase = FirebaseDatabase.getInstance().getReference(s);
 
-        Ratings ratings = new Ratings(email, review);
+        Ratings ratings = new Ratings(email, rating, review);
         ratings.setEmail(email);
-        ratings.setRating(review);
+        ratings.setRating(rating);
+        ratings.setReview(review);
         userId = mDatabase.push().getKey();
         mDatabase.child("Ratings").setValue(ratings);
         toastMessage("Ratings sent.");
     }
+
 
     // Fetches data from url passed
     private class FetchUrl extends AsyncTask<String, Void, String> {
@@ -397,8 +447,6 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         // Executes in UI thread, after the parsing process
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
-            ArrayList<LatLng> points;
-            PolylineOptions lineOptions = null;
 
             // Traversing through all the routes
             for (int i = 0; i < result.size(); i++) {
@@ -453,7 +501,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
                 //Place current location marker
                 LatLng pickUp = new LatLng(location.getLatitude(), location.getLongitude());
-                markerOptionsPickUp = new MarkerOptions();
+                markerOptionsPickUp = new MarkerOptions().draggable(true);
                 markerOptionsPickUp.position(pickUp);
                 markerOptionsPickUp.title("Current Position");
                 markerOptionsPickUp.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
@@ -506,11 +554,15 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button:
+                /*
                 PopupMenu popup = new PopupMenu(booking_Interface.this, v);
                 popup.setOnMenuItemClickListener(booking_Interface.this);
                 popup.inflate(R.menu.menu);
                 popup.show();
                 toastMessage("car type");
+                **/
+                //showPopup();
+                doCardDeets();
                 break;
 
             case R.id.button2:
@@ -522,9 +574,8 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                     toastMessage("Please Pick a place to go..");
 
                 }else{
-                    Trip trip = new Trip(email, pickUp, destUp, carType);
-                    trip.setDest(destUp);
-                    trip.setPickup(pickUp);
+                    Trip trip = new Trip(email,carType,points);
+                    trip.setMarkerPoints(points);
                     trip.setEmail(email);
                     trip.setCarType(carType);
 
@@ -534,14 +585,8 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 }
                 break;
 
-            case R.id.button3:
-                PopupMenu pop = new PopupMenu(booking_Interface.this, v);
-                pop.setOnMenuItemClickListener(booking_Interface.this);
-                pop.inflate(R.menu.ratings);
-                pop.show();
-
-                default:
-                    break;
+            default:
+                break;
         }
     }
 
@@ -574,4 +619,121 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
             }
         }
     }
+    private void doCardDeets() {
+        Intent intent = new Intent (booking_Interface.this, Registration_CardDetails.class);
+        intent.putExtra("email",email);
+        intent.putExtra("price", p);
+        startActivity(intent);
+    }
+
+
+    private void showPopup() {
+        //if you call this method correctly then you do not need to wrap
+        // this method by try-catch block which affects performance
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        final View layout = inflater.inflate(R.layout.invoice, (ViewGroup) findViewById(R.id.popup_element), false);
+
+        final PopupWindow pwindo = new PopupWindow(layout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+
+        //get txt view from "layout" which will be added into popup window
+        //before it you tried to find view in activity container
+        TextView username = (TextView) layout.findViewById(R.id.username);
+        username.setText("Username: " + email);
+        TextView pricev = (TextView) layout.findViewById(R.id.price);
+        pricev.setText(price.getText());
+        TextView distv = (TextView) layout.findViewById(R.id.distance);
+        distv.setText("Trip Distance:"+ dist);
+        TextView eco = (TextView) layout.findViewById(R.id.ecostat);
+        eco.setText("C02 Savings:" + ecoStat);
+
+        //init your button
+        Button btnClosePopup = (Button) layout.findViewById(R.id.btn_close_popup);
+        btnClosePopup.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pwindo.dismiss();
+            }
+        });
+
+        final Button ratings = (Button) layout.findViewById(R.id.button3);
+        ratings.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditText r= (EditText) layout.findViewById(R.id.review);
+                review = r.getText().toString();
+                PopupMenu pop = new PopupMenu(booking_Interface.this, v);
+                pop.setOnMenuItemClickListener(booking_Interface.this);
+                pop.inflate(R.menu.ratings);
+                pop.show();
+            }
+        });
+        //show popup window after you have done initialization of views
+        pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+    }
+
+    private void Animate() {
+
+        carMarker = mMap.addMarker(new MarkerOptions().position(pickUp).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.the_car)));
+
+        handler = new Handler();
+        index = -1;
+        next = 1;
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (index < points.size() - 1) {
+                    index++;
+                    next = index + 1;
+                }
+                if (index < points.size() - 1) {
+                    startPosition = points.get(index);
+                    endPosition = points.get(next);
+                }
+                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
+                valueAnimator.setDuration(1000);
+                valueAnimator.setInterpolator(new LinearInterpolator());
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        v = valueAnimator.getAnimatedFraction();
+                        lng = v * endPosition.longitude + (1 - v)
+                                * startPosition.longitude;
+                        lat = v * endPosition.latitude + (1 - v)
+                                * startPosition.latitude;
+                        LatLng newPos = new LatLng(lat,lng);
+                        carMarker.setPosition(newPos);
+                        carMarker.setAnchor(.5f, .5f);
+                        carMarker.setRotation(getBearing(startPosition, newPos));
+                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition
+                                (new CameraPosition.Builder().target(newPos)
+                                        .zoom(14f).build()));
+
+                    }
+                });
+                valueAnimator.start();
+                if (index != points.size() - 1) {
+                    handler.postDelayed(this, 1000);
+                }else {
+                    showPopup();
+                }
+            }
+        }, 1000);
+    }
+
+    private float getBearing(LatLng begin, LatLng end) {
+        double lat = Math.abs(begin.latitude - end.latitude);
+        double lng = Math.abs(begin.longitude - end.longitude);
+
+        if (begin.latitude < end.latitude && begin.longitude < end.longitude)
+            return (float) (Math.toDegrees(Math.atan(lng / lat)));
+        else if (begin.latitude >= end.latitude && begin.longitude < end.longitude)
+            return (float) ((90 - Math.toDegrees(Math.atan(lng / lat))) + 90);
+        else if (begin.latitude >= end.latitude && begin.longitude >= end.longitude)
+            return (float) (Math.toDegrees(Math.atan(lng / lat)) + 180);
+        else if (begin.latitude < end.latitude && begin.longitude >= end.longitude)
+            return (float) ((90 - Math.toDegrees(Math.atan(lng / lat))) + 270);
+        return -1;
+    }
+
+
 }

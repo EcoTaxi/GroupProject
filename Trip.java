@@ -2,12 +2,16 @@ package com.example.joeco.ecotaxiphoneapp;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
 public class Trip {
 
     private String email;
     private String carType;
     private LatLng pickup;
     private LatLng dest;
+    private ArrayList<LatLng> MarkerPoints;
+
 
     public String getCarType() {
         return carType;
@@ -17,9 +21,9 @@ public class Trip {
         this.carType = carType;
     }
 
-    public Trip(String email, LatLng pickup, LatLng dest, String carType){
+    public Trip(String email, String carType, ArrayList MarkerPoints){
         this.carType = carType;
-
+        this.MarkerPoints = MarkerPoints;
         this.email = email;
         this.dest = dest;
         this.pickup = pickup;
@@ -47,5 +51,13 @@ public class Trip {
 
     public void setDest(LatLng dest) {
         this.dest = dest;
+    }
+
+    public ArrayList<LatLng> getMarkerPoints() {
+        return MarkerPoints;
+    }
+
+    public void setMarkerPoints(ArrayList<LatLng> markerPoints) {
+        MarkerPoints = markerPoints;
     }
 }

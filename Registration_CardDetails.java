@@ -1,168 +1,111 @@
 package com.example.joeco.ecotaxiphoneapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.joeco.ecotaxiphoneapp.config.Config;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 
-public class Registration_CardDetails extends Activity {
+import org.json.JSONException;
+
+import java.math.BigDecimal;
+
+public class Registration_CardDetails extends AppCompatActivity {
     private static final String TAG = "MyActivity";
 
-    EditText editTextCardHolder,editTextCardNumber,editTextExpiry,editTextCSV;
-    Button CardRegister;
-    private String userId;
+    private String email;
+    private String price;
 
-    //Firebase stuff
-    private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference myRef;
+    public static final int PAYPAL_REQUEST_CODE = 7171;
+    private static PayPalConfiguration config = new PayPalConfiguration()
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId(Config.PAYPAL_CLIENT_ID);
 
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration__card_details);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
-        editTextCardHolder = (EditText) findViewById(R.id.editTextCardHolder);
-        editTextCardNumber = (EditText) findViewById(R.id.editTextCardNumber);
-        editTextExpiry = (EditText) findViewById(R.id.editTextExpiry);
-        editTextCSV = (EditText) findViewById(R.id.editTextCSV);
+        email = getIntent().getExtras().getString("email");
+        price = getIntent().getExtras().getString("price");
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
-        FirebaseUser user = mAuth.getCurrentUser();
-        userId = user.getUid();
-        Bundle bundle = getIntent().getExtras();
-        final String name = bundle.getString("Name");
-        final String pnum = bundle.getString("pnum");
-        final String email = bundle.getString("email");
-        final String address = bundle.getString("address");
-        final String password = bundle.getString("password");
-        final String dob = bundle.getString("dob");
+        //Start Paypal..
+        Intent intent = new Intent(this, PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+        startService(intent);
 
+        showPaypal();
+    }
 
-        CardRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String cName = editTextCardHolder.getText().toString();
-                String num = editTextCardNumber.getText().toString();
-                String Exp = editTextExpiry.getText().toString();
-                String CSV = editTextCSV.getText().toString();
-                if (!editTextCardHolder.getText().toString().equals("")&&!editTextCardNumber.getText().toString().equals("")&&!editTextExpiry.getText().toString().equals("")&&!editTextCSV.getText().toString().equals("")){
-                    if(validateCreditCardNumber(num) == true){
-                        //*************THIS IS WHERE YOU STOPPED***********
-                        Customer cust = new Customer();
-                        cust.setName(name);
-                        cust.setPhoneNum(pnum);
-                        cust.setEmail(email);
-                        cust.setCardName(cName);
-                        cust.setAddress(address);
-                        cust.setPassword(password);
-                        cust.setDob(dob);
-                        cust.setExpire(Exp);
-                        cust.setCsv(CSV);
-                        myRef.child(userId).setValue(cust);
-                        toastMessage("Info Saved");
+    private void showBooking() {
+        Intent intent = new Intent (Registration_CardDetails.this, booking_Interface.class);
+        intent.putExtra("email",email);
+        //intent.putExtra("cardForm",cardForm);
 
-                    }else{
-                        toastMessage("Please Enter A Valid Credit card Number");
+        startActivity(intent);
+    }
+
+    private void showPaypal() {
+        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(price)), "EUR",
+                "Payment for trip", PayPalPayment.PAYMENT_INTENT_SALE);
+        Intent intent = new Intent(this, PaymentActivity.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
+        startActivityForResult(intent,PAYPAL_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == PAYPAL_REQUEST_CODE){
+            if(requestCode == RESULT_OK){
+                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if(confirmation != null){
+                    try {
+                        String paymentDetails = confirmation.toJSONObject().toString(4);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }else {
-                    toastMessage("fill out all the fields");
                 }
-
-
-
-
+            }else if(requestCode == Activity.RESULT_CANCELED){
+                toastMessage("Cancel");
             }
-        });
-
-
-
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d(TAG,"on Data change added to the database: \n" + dataSnapshot.getValue());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(TAG, "failed to read value", databaseError.toException());
-            }
-        });
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    Log.d(TAG,"onAuthStateChanged: signed in as:" + user.getUid());
-                    toastMessage("Successfully signed in with: "  + user.getUid());
-                }else {
-                    Log.d(TAG,"onAuthStateChanged: signed out");
-                    toastMessage("Successfully signed out");
-                }
-            }
-        };
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    public void onStop(){
-        super.onStop();
-        if(mAuthListener != null){
-            mAuth.removeAuthStateListener(mAuthListener);
-
+        }else if(requestCode == PaymentActivity.RESULT_EXTRAS_INVALID){
+            toastMessage("Invalid Request.");
         }
     }
+        @Override
+            protected void onStart() {
+                super.onStart();
+                Toast.makeText(getApplicationContext(), "onStart called", Toast.LENGTH_LONG).show();
+            }
 
+
+            @Override
+            protected void onResume() {
+                super.onResume();
+                Toast.makeText(getApplicationContext(), "onResumed called", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected void onPause() {
+
+                super.onPause();
+                //Toast.makeText(getApplicationContext(), "onPause called", Toast.LENGTH_LONG).show();
+            }
     private void toastMessage(String message){
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 
-    //Visa validation.
-    private static boolean validateCreditCardNumber(String str) {
-
-        int[] ints = new int[str.length()];
-        for (int i = 0; i < str.length(); i++) {
-            ints[i] = Integer.parseInt(str.substring(i, i + 1));
         }
-        for (int i = ints.length - 2; i >= 0; i = i - 2) {
-            int j = ints[i];
-            j = j * 2;
-            if (j > 9) {
-                j = j % 10 + 1;
-            }
-            ints[i] = j;
-        }
-        int sum = 0;
-        for (int i = 0; i < ints.length; i++) {
-            sum += ints[i];
-        }
-        if (sum % 10 == 0) {
-            System.out.println(str + " is a valid credit card number");
-            return true;
-        } else {
-            System.out.println(str + " is an invalid credit card number");
-            return false;
-        }
-    }
-}
