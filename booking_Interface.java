@@ -455,7 +455,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
                 lineOptions.width(10);
-                lineOptions.color(Color.BLUE);
+                lineOptions.color(Color.GREEN);
 
                 Log.d("onPostExecute","onPostExecute lineoptions decoded");
 
