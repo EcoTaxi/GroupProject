@@ -11,6 +11,8 @@ public class Trip {
     private LatLng pickup;
     private LatLng dest;
     private ArrayList<LatLng> MarkerPoints;
+    private ArrayList<LatLng> StartStopPoints;
+
 
 
     public String getCarType() {
@@ -21,12 +23,11 @@ public class Trip {
         this.carType = carType;
     }
 
-    public Trip(String email, String carType, ArrayList MarkerPoints){
+    public Trip(String email, String carType, ArrayList MarkerPoints,ArrayList StartStopPoints){
         this.carType = carType;
         this.MarkerPoints = MarkerPoints;
         this.email = email;
-        this.dest = dest;
-        this.pickup = pickup;
+        this.StartStopPoints = StartStopPoints;
     }
 
     public String getEmail() {
@@ -59,5 +60,13 @@ public class Trip {
 
     public void setMarkerPoints(ArrayList<LatLng> markerPoints) {
         MarkerPoints = markerPoints;
+    }
+
+    public ArrayList<LatLng> getStartStopPoints() {
+        return StartStopPoints;
+    }
+
+    public void setStartStopPoints(ArrayList<LatLng> startStopPoints) {
+        StartStopPoints = startStopPoints;
     }
 }

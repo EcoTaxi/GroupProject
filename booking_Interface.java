@@ -563,13 +563,14 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                     toastMessage("Please Pick a place to go..");
 
                 }else{
-                    Trip trip = new Trip(email,carType,points);
+                    Trip trip = new Trip(email,carType,points,MarkerPoints);
                     trip.setMarkerPoints(points);
+                    trip.setStartStopPoints(MarkerPoints);
                     trip.setEmail(email);
                     trip.setCarType(carType);
 
-                    userId = mDatabase.push().getKey();
-                    mDatabase.child("Trip").setValue(trip);
+                    String userId = mDatabase.push().getKey();
+                    mDatabase.child(email.replaceAll("[^a-zA-Z0-9 ]", "")).setValue(trip);
                     toastMessage("Request Send.");
                 }
                 break;
