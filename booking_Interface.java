@@ -103,7 +103,6 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     private float v;
     private double lng;
     private double lat;
-    private Button b;
     private String p;
     private LatLng startPosition;
     private LatLng endPosition;
@@ -126,17 +125,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
 
-        b = (Button)findViewById(R.id.button4);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!autocompleteFragment.equals("")) {
-                    Animate();
-                }else{
-                    toastMessage("Pick a place to go!");
-                }
-            }
-        });
+
         autocompleteFragment = (SupportPlaceAutocompleteFragment)
                 getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
@@ -354,16 +343,12 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 return true;
             case R.id.bad:
                 rating = "bad";
-
-                sendRating(rating, review);
                 return true;
             case R.id.good:
                 rating = "good";
-                sendRating(rating, review);
                 return true;
             case R.id.mrBurns:
                 rating = "excellent";
-                sendRating(rating, review);
                 return true;
             default:
                 return false;
@@ -562,7 +547,11 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 toastMessage("car type");
                 **/
                 //showPopup();
-                doCardDeets();
+                if(p != null){
+                    doCardDeets();
+                }else {
+                    toastMessage("Please pick a place to go");
+                }
                 break;
 
             case R.id.button2:
@@ -584,6 +573,13 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                     toastMessage("Request Send.");
                 }
                 break;
+
+            case R.id.button4:
+                if (destUp != null) {
+                    Animate();
+                }else{
+                    toastMessage("Pick a place to go!");
+                }
 
             default:
                 break;
@@ -665,6 +661,13 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 pop.setOnMenuItemClickListener(booking_Interface.this);
                 pop.inflate(R.menu.ratings);
                 pop.show();
+            }
+        });
+        final Button send = (Button) layout.findViewById(R.id.btn_send_popup);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendRating(rating,review);
             }
         });
         //show popup window after you have done initialization of views
