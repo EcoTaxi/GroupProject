@@ -343,16 +343,12 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 return true;
             case R.id.bad:
                 rating = "bad";
-
-                sendRating(rating, review);
                 return true;
             case R.id.good:
                 rating = "good";
-                sendRating(rating, review);
                 return true;
             case R.id.mrBurns:
                 rating = "excellent";
-                sendRating(rating, review);
                 return true;
             default:
                 return false;
@@ -665,6 +661,13 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 pop.setOnMenuItemClickListener(booking_Interface.this);
                 pop.inflate(R.menu.ratings);
                 pop.show();
+            }
+        });
+        final Button send = (Button) layout.findViewById(R.id.btn_send_popup);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendRating(rating,review);
             }
         });
         //show popup window after you have done initialization of views
