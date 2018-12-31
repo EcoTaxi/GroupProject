@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registration">
+    tools:context=".Registration_CardDetails">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -22,67 +22,44 @@
 
         <EditText
 
-            android:id="@+id/editTextName"
+            android:id="@+id/editTextCardHolder"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:hint="Name" />
+            android:hint="Card Holder Name" />
 
         <EditText
 
-            android:id="@+id/editTextPhoneNumber"
+            android:id="@+id/editTextCardNumber"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:hint="Phone Number" />
+            android:hint="Card Number" />
 
         <EditText
 
-            android:id="@+id/editTextEmail"
+            android:id="@+id/editTextExpiry"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:hint="Enter your email" />
+            android:hint="MM/YR" />
 
         <EditText
 
-            android:id="@+id/editTextPassword"
+            android:id="@+id/editTextCSV"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:hint="Password" />
-
-        <EditText
-
-            android:id="@+id/editTextAddress"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="Address" />
-
-        <EditText
-
-            android:id="@+id/editTextDOB"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="DOB" />
-
+            android:hint="CSV" />
 
 
         <Button
-            android:id="@+id/continueButton"
+            android:id="@+id/CardRegister"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:text="Continue" />
+            android:text="Register" />
 
-        <Button
-            android:id="@+id/socialButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:text="Social Media" />
 
     </LinearLayout>
 
