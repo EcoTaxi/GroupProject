@@ -20,12 +20,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <EditText
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ecotaxi"/>
 
+        <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
             android:hint="Enter your e-mail" />
 
         <EditText
@@ -33,7 +37,7 @@
             android:id="@+id/editTextPassword"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="12dp"
             android:hint="Enter your password"
             android:inputType="textPassword"/>
 
