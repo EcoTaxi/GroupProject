@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EcoTaxi</title>
+  
+<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAz1nWyvHjJ2qCPzY_izdae6jZ5Dpj6LHU",
+    authDomain: "ecotaxiphoneapp-9e80f.firebaseapp.com",
+    databaseURL: "https://ecotaxiphoneapp-9e80f.firebaseio.com",
+    projectId: "ecotaxiphoneapp-9e80f",
+    storageBucket: "ecotaxiphoneapp-9e80f.appspot.com",
+    messagingSenderId: "53237770388"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(() => {
+  const database = firebase.database();
+</head>
+<body>
+  <h1>Welcome to PetsApp!</h1>
+
+  <button id="resetButton">Reset database</button>
+  <hr/>
+
+  Name: <input id="nameBox" type="text" size="20"/>
+  <button id="readButton">Get profile</button>
+  <button id="allUsersButton">Get all usernames</button>
+
+  <div id="jobDiv"></div>
+  <img id="petImage"></img>
+
+  <hr/>
+  Name: <input id="insertNameBox" type="text" size="20"/>
+  Job: <input id="insertJobBox" type="text" size="20"/>
+  Pet: <input id="insertPetBox" type="text" size="20"/>
+  <button id="insertButton">Insert into database</button>
+
+  <hr/>
+  Name: <input id="deleteNameBox" type="text" size="20"/>
+  <button id="deleteButton">Delete from database</button>
+
+  <hr/>
+  <div id="status"></div>
+</body>
+</html>

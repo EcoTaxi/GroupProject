@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Booking</title>
+	 <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  const config = {
+    apiKey: "AIzaSyAz1nWyvHjJ2qCPzY_izdae6jZ5Dpj6LHU",
+    authDomain: "ecotaxiphoneapp-9e80f.firebaseapp.com",
+    databaseURL: "https://ecotaxiphoneapp-9e80f.firebaseio.com",
+    projectId: "ecotaxiphoneapp-9e80f",
+    storageBucket: "ecotaxiphoneapp-9e80f.appspot.com",
+    messagingSenderId: "53237770388"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(() => {
+  const database = firebase.database();
+    database.ref('User').limitToLast(1).on('value', (snapshot) => {
+    const allUsers = snapshot.val();
+    console.log('User/ changed:', allUsers);
+    if (allUsers) {
+      $('#last').html(''); // clear the HTML
+      $('#last').append('Last Created User');
+      Object.keys(allUsers).forEach((User) => {
+        $('#last').append('<p>' +  '  Email: ' + allUsers[User].email +' ; Name: '  + allUsers[User].name + '</p>');
+      });
+    }
+  });
+  
+  
+    
+ 
+});
+  </script>
+    
+    <link rel="stylesheet" type="text/css" href="/css/EcoBooking.css">
+  </head>
+  <body>
+    <div id = "header"> 
+<img id="logo" class="logo " src="/pic/ecotaxi.png"/>
+
+</div>
+<div id = "menu" class = "closed">
+
+<ul>
+<li><a href = "/index">Home</a></li>
+<li><a href = "/customer_info">Customer Info</a></li>
+<li><a href = "/booking">Booking</a></li>
+<li><a href = "/car_details">Car Status</a></li>
+</ul>
+</div >
+
+  
+  
+
+ <div class="view">
+
+ <div id="googleMap" style="width:600px;height:400px;"></div>
+
+ 
+
+ 
+  <div class ="display" id="disp">
+  <div class ="last" id="last">
+  </div>
+    
+  <div id="info"></div>
+  <div id ="choice"><h1>Accept/Deny Order </h1></div>
+  <button class="btn" id="Yes">Yes</button>
+  <button class="btn" id="No">No</button>
+  </div>
+ </div>
+ </div>
+  <hr/>
+  
+   
+  
+  <footer class='copyright'> &#169 2018 Barbarossa</footer>
+   <script>
+function myMap() {
+var mapProp= {
+  center:new google.maps.LatLng(51.508742,-0.120850),
+  zoom:5,
+};
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=initMap" async defer></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+
+  </body>
+</html>
