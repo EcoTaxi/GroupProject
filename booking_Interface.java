@@ -88,7 +88,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     ArrayList<LatLng> MarkerPoints;
     ArrayList<LatLng> points;
     private GoogleApiClient mGoogleApiClient;
-    private String MY_API_KEY = "AIzaSyDCV_51ykRTUKcC1wvvKWJu8PQPPJY3M9w";
+    private String MY_API_KEY = "";
     private String carType = "5 Seater";
     private String userId;
     private DatabaseReference mDatabase;
@@ -123,6 +123,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        MY_API_KEY = getResources().getString(R.string.google_maps_key);
 
 
 
@@ -195,7 +196,9 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         price = (TextView) findViewById(R.id.priceView);
         p = d;
         price.setText("Estimated Price: €" + d);
-        ecoStat = String.valueOf(Double.valueOf(d)*80)+"g";
+
+        String e = dc.format(Double.valueOf(d)*80);
+        ecoStat = String.valueOf(e)+"g";
         dist = String.valueOf(d+"km");
         return distance;
     }
@@ -354,6 +357,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 return false;
         }
     }
+
     private void sendRating(String rating, String review) {
         String s = "Ratings";
         mDatabase = FirebaseDatabase.getInstance().getReference(s);
@@ -366,7 +370,6 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         mDatabase.child("Ratings").setValue(ratings);
         toastMessage("Ratings sent.");
     }
-
 
     // Fetches data from url passed
     private class FetchUrl extends AsyncTask<String, Void, String> {
@@ -716,12 +719,12 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                 });
                 valueAnimator.start();
                 if (index != points.size() - 1) {
-                    handler.postDelayed(this, 1000);
+                    handler.postDelayed(this, 2000);
                 }else {
                     showPopup();
                 }
             }
-        }, 1000);
+        }, 2000);
     }
 
     private float getBearing(LatLng begin, LatLng end) {
