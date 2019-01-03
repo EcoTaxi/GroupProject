@@ -1,5 +1,4 @@
-package com.example.joeco.ecotaxiphoneapp;
-
+package com.example.joeco.ecotaxitest;
 import android.Manifest;
 import android.animation.ValueAnimator;
 import android.app.AlertDialog;
@@ -18,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
@@ -71,6 +71,7 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class booking_Interface extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, PopupMenu.OnMenuItemClickListener {
     SupportMapFragment mapFragment;
+    private NotificationHelper mNotificationHelper;
     LocationRequest mLocationRequest;
     Location mLastLocation;
     Marker mCurrLocationMarker;
@@ -88,7 +89,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     ArrayList<LatLng> MarkerPoints;
     ArrayList<LatLng> points;
     private GoogleApiClient mGoogleApiClient;
-    private String MY_API_KEY = "";
+    private String MY_API_KEY = "AIzaSyDVA_D_2U01DLowTGty-dDKISEuL_3OuS8";
     private String carType = "5 Seater";
     private String userId;
     private DatabaseReference mDatabase;
@@ -123,7 +124,6 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        MY_API_KEY = getResources().getString(R.string.google_maps_key);
 
 
 
@@ -580,6 +580,8 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
 
             case R.id.button4:
                 if (destUp != null) {
+                    mNotificationHelper = new NotificationHelper(this);
+                    notifyPendingIntent();
                     Animate();
                 }else{
                     toastMessage("Pick a place to go!");
@@ -697,7 +699,7 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
                     endPosition = points.get(next);
                 }
                 ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
-                valueAnimator.setDuration(1000);
+                valueAnimator.setDuration(2000);
                 valueAnimator.setInterpolator(new LinearInterpolator());
                 valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
@@ -740,6 +742,11 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
         else if (begin.latitude < end.latitude && begin.longitude >= end.longitude)
             return (float) ((90 - Math.toDegrees(Math.atan(lng / lat))) + 270);
         return -1;
+    }
+
+    private void notifyPendingIntent() {
+        NotificationCompat.Builder nb = mNotificationHelper.getChannelNotification("Car Here", "Your car is outside to take you to " + markerOptionsDest.getTitle());
+        mNotificationHelper.getManager().notify(1, nb.build());
     }
 
 
