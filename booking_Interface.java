@@ -541,15 +541,14 @@ public class booking_Interface extends FragmentActivity implements OnMapReadyCal
     }
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.button:
-                /*
+            case R.id.cartype:
                 PopupMenu popup = new PopupMenu(booking_Interface.this, v);
                 popup.setOnMenuItemClickListener(booking_Interface.this);
                 popup.inflate(R.menu.menu);
                 popup.show();
-                toastMessage("car type");
-                **/
-                //showPopup();
+                break;
+
+            case R.id.button:
                 if(p != null){
                     doCardDeets();
                 }else {

@@ -30,6 +30,16 @@
         android:layout_alignParentStart="true"
         android:background="@color/white"/>
 
+    <ImageView
+        android:id="@+id/cartype"
+        android:layout_alignParentEnd="true"
+        android:layout_width="150dp"
+        android:layout_below="@id/priceView"
+        android:layout_height="150dp"
+        android:src="@drawable/cartype"
+        android:layout_marginEnd="-40dp"
+        android:onClick="onClick" />
+
 
     <FrameLayout
         android:layout_width="match_parent"
